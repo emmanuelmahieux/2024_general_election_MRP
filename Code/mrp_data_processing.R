@@ -50,10 +50,10 @@ convert_char_to_factor <- function(df) {
 #process census data for area-level df
 
 #load the census area-level dfs
-census_age = read.csv('/Users/emahieux/Desktop/Campaign Lab Hackathon/Data/MRP/area-level variables/unprocessed/census_age.csv')
-census_edu = read.csv('/Users/emahieux/Desktop/Campaign Lab Hackathon/Data/MRP/area-level variables/unprocessed/census_education.csv')
-census_health = read.csv('/Users/emahieux/Desktop/Campaign Lab Hackathon/Data/MRP/area-level variables/unprocessed/census_health.csv')
-census_ethn = read.csv('/Users/emahieux/Desktop/Campaign Lab Hackathon/Data/MRP/area-level variables/unprocessed/census_ethnicity.csv')
+census_age = read.csv('./census_age.csv')
+census_edu = read.csv('./census_education.csv')
+census_health = read.csv('./census_health.csv')
+census_ethn = read.csv('./census_ethnicity.csv')
 
 #census age
 
@@ -282,7 +282,7 @@ colnames(individual_level)[colnames(individual_level)=='new_pcon_codeW28'] = 'ne
 
 # add new ONS constituency codes
 
-ons_constituency_codes = read.csv('/Users/emahieux/Desktop/Campaign Lab Hackathon/Data/MRP/Parliamentary_Constituencies_2024.csv')
+ons_constituency_codes = read.csv('./Parliamentary_Constituencies_2024.csv')
 
 ons_constituency_codes = ons_constituency_codes[,1:2]
 
@@ -300,7 +300,7 @@ individual_level = merge(individual_level, ons_constituency_codes, by = 'new_con
 #you'll need this df to correlate constituency-level predictions 
 #with the actual results
 
-ge_2024 = read_excel('/Users/emahieux/Desktop/Campaign Lab Hackathon/Data/MRP/HoC-GE2024-results-by-constituency.xlsx',
+ge_2024 = read_excel('./HoC-GE2024-results-by-constituency.xlsx',
                      skip = 2)
 
 ge_2024 = convert_char_to_factor(ge_2024)
@@ -495,7 +495,7 @@ region_to_constituency <- region_to_constituency %>%
 ge_2019 = read_excel('/estimates-2019-ge-result-new-constituencies.xlsx',
                      sheet = '2. results')
 
-ge_2019 = read_excel('/Users/emahieux/Desktop/Campaign Lab Hackathon/Data/MRP/estimates-2019-ge-result-new-constituencies.xlsx',
+ge_2019 = read_excel('./estimates-2019-ge-result-new-constituencies.xlsx',
                      sheet = '2. results')
 
 ge_2019 = data.frame(ge_2019)
@@ -664,7 +664,7 @@ write_csv(area_level, 'area_level.csv')
 
 #read in Census data, aka poststratification frame (psf)
 psf = read.csv('./2021_census_age_edu.csv')
-psf = read_csv('/Users/emahieux/Desktop/Campaign Lab Hackathon/Data/MRP/2021_census_age_edu.csv')
+psf = read_csv('./2021_census_age_edu.csv')
 
 #psf = change_census_colnames(psf)
 
