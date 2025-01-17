@@ -440,6 +440,7 @@ individual_level$edlevel = factor(individual_level$edlevel,
 
 #--------
 
+#rename regions
 levels(individual_level$region)[levels(individual_level$region) == 1] <- "North East"
 levels(individual_level$region)[levels(individual_level$region) == 2] <- "North West"
 levels(individual_level$region)[levels(individual_level$region) == 3] <- "Yorkshire and the Humber"
@@ -463,7 +464,7 @@ individual_level$new_constituency = factor(individual_level$new_constituency,
                                            exclude = NULL)
 
 #correct encoding of Ynys Mon
-# levels(individual_level$new_constituency)[levels(individual_level$new_constituency) == "Ynys M<U+00F4>n"] <- "Ynys Mon"
+# levels(individual_level$new_constituency)[levels(individual_level$new_constituency) == "Ynys M\303\264n"] <- "Ynys Mon"
 # levels(area_level$constituency)[levels(area_level$constituency) == "Ynys M<U+00F4>n"] <- "Ynys Mon"
 # levels(psf$constituency)[levels(psf$constituency) == "Ynys M<U+00F4>n"] <- "Ynys Mon"
 
@@ -493,9 +494,6 @@ region_to_constituency <- region_to_constituency %>%
 #load the 2019 general election results formatted by Chris Hanretty as if the 2024 
 #constituency boundaries had been used at the 2019 general election
 ge_2019 = read_excel('/estimates-2019-ge-result-new-constituencies.xlsx',
-                     sheet = '2. results')
-
-ge_2019 = read_excel('./estimates-2019-ge-result-new-constituencies.xlsx',
                      sheet = '2. results')
 
 ge_2019 = data.frame(ge_2019)
@@ -664,9 +662,8 @@ write_csv(area_level, 'area_level.csv')
 
 #read in Census data, aka poststratification frame (psf)
 psf = read.csv('./2021_census_age_edu.csv')
-psf = read_csv('./2021_census_age_edu.csv')
-
-#psf = change_census_colnames(psf)
+                 
+psf = change_census_colnames(psf)
 
 colnames(psf)[colnames(psf)=="Post-2019 Westminster Parliamentary constituencies Code"] = 'constituency_code'
 colnames(psf)[colnames(psf)=="Post-2019 Westminster Parliamentary constituencies"] = 'constituency'
@@ -786,6 +783,7 @@ only_in_psf <- setdiff(psf_list,
 
 #if the below give the output character(0), then the dfs have 
 #the same spelling and ordering of constituencies and all is fine
+                 
 only_in_individual_level
 only_in_psf
 
